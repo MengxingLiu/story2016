@@ -1,0 +1,161 @@
+Package afex loaded successfully!
+
+Package phia loaded successfully!
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+***** Summary information of data structure *****
+30 subjects :  s10 s11 s12 s13 s14 s15 s16 s17 s19 s2 s20 s21 s22 s23 s24 s25 s26 s27 s28 s29 s3 s31 s32 s33 s4 s5 s6 s7 s8 s9 
+120 response values
+2 levels for factor Modality : Listen Read 
+4 levels for factor Scale : CS NS SW US 
+7 post hoc tests
+
+Contingency tables of subject distributions among the categorical variables:
+
+        Scale
+Modality CS NS SW US
+  Listen 14 14 14 14
+  Read   16 16 16 16
+
+Tabulation of subjects against each of the categorical variables:
+~~~~~~~~~~~~~~
+lop$nSubj vs Modality:
+     
+      Listen Read
+  s10      0    4
+  s11      0    4
+  s12      4    0
+  s13      4    0
+  s14      0    4
+  s15      4    0
+  s16      4    0
+  s17      0    4
+  s19      0    4
+  s2       4    0
+  s20      0    4
+  s21      0    4
+  s22      0    4
+  s23      0    4
+  s24      0    4
+  s25      0    4
+  s26      0    4
+  s27      0    4
+  s28      0    4
+  s29      0    4
+  s3       4    0
+  s31      4    0
+  s32      4    0
+  s33      0    4
+  s4       4    0
+  s5       4    0
+  s6       4    0
+  s7       4    0
+  s8       4    0
+  s9       4    0
+
+~~~~~~~~~~~~~~
+lop$nSubj vs Scale:
+     
+      CS NS SW US
+  s10  1  1  1  1
+  s11  1  1  1  1
+  s12  1  1  1  1
+  s13  1  1  1  1
+  s14  1  1  1  1
+  s15  1  1  1  1
+  s16  1  1  1  1
+  s17  1  1  1  1
+  s19  1  1  1  1
+  s2   1  1  1  1
+  s20  1  1  1  1
+  s21  1  1  1  1
+  s22  1  1  1  1
+  s23  1  1  1  1
+  s24  1  1  1  1
+  s25  1  1  1  1
+  s26  1  1  1  1
+  s27  1  1  1  1
+  s28  1  1  1  1
+  s29  1  1  1  1
+  s3   1  1  1  1
+  s31  1  1  1  1
+  s32  1  1  1  1
+  s33  1  1  1  1
+  s4   1  1  1  1
+  s5   1  1  1  1
+  s6   1  1  1  1
+  s7   1  1  1  1
+  s8   1  1  1  1
+  s9   1  1  1  1
+
+***** End of data structure information *****
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Reading input files now...
+
+Reading input files: Done!
+
+If the program hangs here for more than, for example, half an hour,
+kill the process because the model specification or the GLT coding
+is likely inappropriate.
+
+[1] "Great, test run passed at voxel (18, 32, 25)!"
+[1] "Start to compute 50 slices along Z axis. You can monitor the progress"
+[1] "and estimate the total run time as shown below."
+[1] "11/02/16 12:11:01.208"
+Package snow loaded successfully!
+
+Z slice  1 done:  11/02/16 12:11:08.849 
+Z slice  2 done:  11/02/16 12:11:08.963 
+Z slice  3 done:  11/02/16 12:11:10.165 
+Z slice  4 done:  11/02/16 12:11:32.155 
+Z slice  5 done:  11/02/16 12:12:21.454 
+Z slice  6 done:  11/02/16 12:13:25.526 
+Z slice  7 done:  11/02/16 12:14:35.648 
+Z slice  8 done:  11/02/16 12:15:50.287 
+Z slice  9 done:  11/02/16 12:17:46.619 
+Z slice  10 done:  11/02/16 12:19:58.390 
+Z slice  11 done:  11/02/16 12:22:19.356 
+Z slice  12 done:  11/02/16 12:24:51.996 
+Z slice  13 done:  11/02/16 12:27:43.141 
+Z slice  14 done:  11/02/16 12:30:53.243 
+Z slice  15 done:  11/02/16 12:34:23.805 
+Z slice  16 done:  11/02/16 12:38:11.090 
+Z slice  17 done:  11/02/16 12:41:19.287 
+Z slice  18 done:  11/02/16 12:43:40.279 
+Z slice  19 done:  11/02/16 12:46:07.097 
+Z slice  20 done:  11/02/16 12:48:39.434 
+Z slice  21 done:  11/02/16 12:51:11.338 
+Z slice  22 done:  11/02/16 12:53:43.299 
+Z slice  23 done:  11/02/16 12:56:18.648 
+Z slice  24 done:  11/02/16 12:58:53.444 
+Z slice  25 done:  11/02/16 13:01:27.445 
+Z slice  26 done:  11/02/16 13:03:57.575 
+Z slice  27 done:  11/02/16 13:06:27.051 
+Z slice  28 done:  11/02/16 13:08:55.103 
+Z slice  29 done:  11/02/16 13:11:21.771 
+Z slice  30 done:  11/02/16 13:13:47.849 
+Z slice  31 done:  11/02/16 13:16:13.516 
+Z slice  32 done:  11/02/16 13:18:33.962 
+Z slice  33 done:  11/02/16 13:20:51.424 
+Z slice  34 done:  11/02/16 13:23:05.631 
+Z slice  35 done:  11/02/16 13:25:14.449 
+Z slice  36 done:  11/02/16 13:27:18.913 
+Z slice  37 done:  11/02/16 13:29:20.103 
+Z slice  38 done:  11/02/16 13:31:16.658 
+Z slice  39 done:  11/02/16 13:33:06.666 
+Z slice  40 done:  11/02/16 13:34:50.481 
+Z slice  41 done:  11/02/16 13:36:25.794 
+Z slice  42 done:  11/02/16 13:37:53.537 
+Z slice  43 done:  11/02/16 13:39:13.590 
+Z slice  44 done:  11/02/16 13:40:25.980 
+Z slice  45 done:  11/02/16 13:41:28.905 
+Z slice  46 done:  11/02/16 13:42:21.478 
+Z slice  47 done:  11/02/16 13:42:58.661 
+Z slice  48 done:  11/02/16 13:43:23.765 
+Z slice  49 done:  11/02/16 13:43:31.974 
+Z slice  50 done:  11/02/16 13:43:32.240 
+
+Congratulations! You have got an output group_MVM+tlrc.
+

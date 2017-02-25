@@ -1,0 +1,238 @@
+++ 3dcalc: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ./aseg_clip.nii
+++ 3dAutomask: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: Emperor Zhark
+++ Loading dataset aseg_clip.nii
+++ Forming automask
+ + Fixed clip level = 7.017300
+ + Used gradual clip level = 6.813900 .. 7.307015
+ + Number voxels above clip level = 1597402
+ + Clustering voxels ...
+ + Largest cluster has 1597196 voxels
+ + Clustering voxels ...
+ + Largest cluster has 1588105 voxels
+ + Filled 20828 voxels in small holes; now have 1608933 voxels
+ + Filled 113151 voxels in large holes; now have 1722084 voxels
+ + Clustering voxels ...
+ + Largest cluster has 1722064 voxels
+ + Clustering non-brain voxels ...
+ + Clustering voxels ...
+ + Largest cluster has 15052065 voxels
+ + Mask now has 1725151 voxels
+++ 1725151 voxels in the mask [out of 16777216: 10.28%]
+++ first  58 x-planes are zero [from R]
+++ last   58 x-planes are zero [from L]
+++ first  49 y-planes are zero [from S]
+++ last   58 y-planes are zero [from I]
+++ first  22 z-planes are zero [from P]
+++ last   55 z-planes are zero [from A]
+++ Output dataset ./automask.nii
+++ CPU time = 0.000000 sec
+++ 3dcalc: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ./subAvg_SurfVol_ns+orig.BRIK
+Center distance of 17.342145 mm
+Padding ...
+++ 3dZeropad: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ output dataset: ./__ats_tmp__ref_TT_N27_40pad+tlrc.BRIK
+Resampling ...
+++ 3dcalc: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ././__ats_tmp__resamp_step+orig.BRIK
+++ 3dcalc: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ././__ats_tmp__resamp+tlrc.BRIK
+Clipping -0.000100 222.000100 ...
+++ 3dcalc: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ./__ats_tmp___rs_subAvg_SurfVol_ns+tlrc.BRIK
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp___rs_subAvg_SurfVol_ns+tlrc.HEAD
+ + Changed dataset view type and filenames.
+++ 3drefit processed 1 datasets
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp__resamp_NN+tlrc.HEAD
+ + Changed dataset view type and filenames.
+++ 3drefit processed 1 datasets
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp__resamp_edge_art+tlrc.HEAD
+ + Changed dataset view type and filenames.
+++ 3drefit processed 1 datasets
+Registration (linear final interpolation) ...
+++ 3dWarpDrive: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+RMS[0] = 50.4047 39.844   ITER = 8/137
+50.4047
+
+Warping has converged.
+
+++ 3dcopy: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ 3dWarp: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+Applying brain mask
+++ 3dcalc: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ././__ats_tmp__reg_braintlrcstep+orig.BRIK
+++ 3dWarp: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ 3drename: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ THD_rename_dataset_files: rename __ats_tmp___pad40_subAvg_SurfVol_ns_at+orig.HEAD -> __ats_tmp___pad40_subAvg_SurfVol_ns_at.skl+orig.HEAD
+++ THD_rename_dataset_files: rename __ats_tmp___pad40_subAvg_SurfVol_ns_at+orig.BRIK -> __ats_tmp___pad40_subAvg_SurfVol_ns_at.skl+orig.BRIK
+++ 3dcalc: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ././__ats_tmp___pad40_subAvg_SurfVol_ns_at+orig.BRIK
+Unpadding ...
+++ 3dZeropad: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ output dataset: ./__ats_tmp___upad40_subAvg_SurfVol_ns_at+orig.BRIK
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp___upad40_subAvg_SurfVol_ns_at+orig
+*+ WARNING: Changing the space of an ORIG view dataset may cause confusion!
+*+ WARNING:  NIFTI copies will be interpreted as TLRC view (not TLRC space).
+*+ WARNING:  Consider changing the view of the dataset to TLRC view also
+++ 3drefit processed 1 datasets
+Changing view of transformed anatomy
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp___upad40_subAvg_SurfVol_ns_at+orig.HEAD
+ + Changed dataset view type and filenames.
+++ 3drefit processed 1 datasets
+Setting parent with 3drefit -wset subAvg_SurfVol_ns+orig. __ats_tmp___upad40_subAvg_SurfVol_ns_at+tlrc
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp___upad40_subAvg_SurfVol_ns_at+tlrc
+++ 3drefit processed 1 datasets
+++ 3drename: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Warning: ignoring +tlrc on new_prefix.
+++ THD_rename_dataset_files: rename __ats_tmp___upad40_subAvg_SurfVol_ns_at+tlrc.HEAD -> subAvg_SurfVol_ns_at+tlrc.HEAD
+++ THD_rename_dataset_files: rename __ats_tmp___upad40_subAvg_SurfVol_ns_at+tlrc.BRIK -> subAvg_SurfVol_ns_at+tlrc.BRIK
+Cleanup ...
+Applying tlrc warp from ./subAvg_SurfVol_ns_at+tlrc to subAvg_SurfVol+orig ...
+Padding the input data before warping
+++ 3dZeropad: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ output dataset: ./__ats_tmp__ipad+orig.BRIK
+Creating grid at (1 1 1)mm RAI resolution...
+Warping per parent transform (quintic interpolation) and resampling with Bk interpolation (use -onewarp for single interpolation) ...
+++ 3dWarp: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp__warp_grid+tlrc
+ + Changed dataset view type and filenames.
+++ 3drefit processed 1 datasets
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp_subAvg_SurfVol_at+orig
+*+ WARNING: Changing the space of an ORIG view dataset may cause confusion!
+*+ WARNING:  NIFTI copies will be interpreted as TLRC view (not TLRC space).
+*+ WARNING:  Consider changing the view of the dataset to TLRC view also
+++ 3drefit processed 1 datasets
+Changing view of xformed volumes
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp_subAvg_SurfVol_at+orig.HEAD
+ + Changed dataset view type and filenames.
+++ 3drefit processed 1 datasets
+++ 3drename: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Warning: ignoring +tlrc on new_prefix.
+++ THD_rename_dataset_files: rename __ats_tmp_subAvg_SurfVol_at+tlrc.HEAD -> subAvg_SurfVol_at+tlrc.HEAD
+++ THD_rename_dataset_files: rename __ats_tmp_subAvg_SurfVol_at+tlrc.BRIK -> subAvg_SurfVol_at+tlrc.BRIK
+Cleanup ...
+++ 3dcalc: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ./automask+orig.BRIK
+Applying tlrc warp from ./subAvg_SurfVol_ns_at+tlrc to automask+orig ...
+Padding the input data before warping
+++ 3dZeropad: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ output dataset: ./__ats_tmp__ipad+orig.BRIK
+Creating grid at (1 1 1)mm RAI resolution...
+Warping per parent transform (NN interpolation) and resampling with NN interpolation (use -onewarp for single interpolation) ...
+++ 3dWarp: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp__warp_grid+tlrc
+ + Changed dataset view type and filenames.
+++ 3drefit processed 1 datasets
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp_automask_at+orig
+*+ WARNING: Changing the space of an ORIG view dataset may cause confusion!
+*+ WARNING:  NIFTI copies will be interpreted as TLRC view (not TLRC space).
+*+ WARNING:  Consider changing the view of the dataset to TLRC view also
+++ 3drefit processed 1 datasets
+Changing view of xformed volumes
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp_automask_at+orig.HEAD
+ + Changed dataset view type and filenames.
+++ 3drefit processed 1 datasets
+++ 3drename: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Warning: ignoring +tlrc on new_prefix.
+++ THD_rename_dataset_files: rename __ats_tmp_automask_at+tlrc.HEAD -> automask_at+tlrc.HEAD
+++ THD_rename_dataset_files: rename __ats_tmp_automask_at+tlrc.BRIK -> automask_at+tlrc.BRIK
+Cleanup ...
+++ 3dAFNItoNIFTI: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ 3dcalc: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ./aseg+orig.BRIK
+Applying tlrc warp from ./subAvg_SurfVol_ns_at+tlrc to aseg+orig ...
+Padding the input data before warping
+++ 3dZeropad: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ output dataset: ./__ats_tmp__ipad+orig.BRIK
+Creating grid at (1 1 1)mm RAI resolution...
+Warping per parent transform (NN interpolation) and resampling with NN interpolation (use -onewarp for single interpolation) ...
+++ 3dWarp: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp__warp_grid+tlrc
+ + Changed dataset view type and filenames.
+++ 3drefit processed 1 datasets
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp_aseg_at+orig
+*+ WARNING: Changing the space of an ORIG view dataset may cause confusion!
+*+ WARNING:  NIFTI copies will be interpreted as TLRC view (not TLRC space).
+*+ WARNING:  Consider changing the view of the dataset to TLRC view also
+++ 3drefit processed 1 datasets
+Changing view of xformed volumes
+++ 3drefit: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Authored by: RW Cox
+++ Processing AFNI dataset __ats_tmp_aseg_at+orig.HEAD
+ + Changed dataset view type and filenames.
+++ 3drefit processed 1 datasets
+++ 3drename: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ Warning: ignoring +tlrc on new_prefix.
+++ THD_rename_dataset_files: rename __ats_tmp_aseg_at+tlrc.HEAD -> aseg_at+tlrc.HEAD
+++ THD_rename_dataset_files: rename __ats_tmp_aseg_at+tlrc.BRIK -> aseg_at+tlrc.BRIK
+Cleanup ...
+++ 3dAFNItoNIFTI: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+cp: cannot stat ‘/Users/XJWang/XJWang/bin/both_tlrc.spec’: No such file or directory
+cp: cannot stat ‘/Users/XJWang/XJWang/bin/lh_tlrc.spec’: No such file or directory
+cp: cannot stat ‘/Users/XJWang/XJWang/bin/rh_tlrc.spec’: No such file or directory
+Reading std.lh.smoothwm.asc ...
+Performing talairach transform...
+Writing surface...
+Reading std.lh.pial.asc ...
+Performing talairach transform...
+Writing surface...
+Reading std.lh.white.asc ...
+Performing talairach transform...
+Writing surface...
+Reading std.rh.smoothwm.asc ...
+Performing talairach transform...
+Writing surface...
+Reading std.rh.pial.asc ...
+Performing talairach transform...
+Writing surface...
+Reading std.rh.white.asc ...
+Performing talairach transform...
+Writing surface...
+++ 3dAFNItoNIFTI: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+++ 3dAFNItoNIFTI: AFNI version=AFNI_16.0.00 (Jan  1 2016) [64-bit]
+=================It is finished!========================
