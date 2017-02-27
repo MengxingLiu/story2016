@@ -31,7 +31,7 @@ for tp =  {'NS' 'CS' 'US' 'SW'}
 
 % load average time seires of Reading group
 
-    avg_image = load_nii([spath 'avg_r_read_' tp{1} '.nii']);
+    avg_image = load_nii([spath 'mean_ts_read_' tp{1} '.nii']);
     avg_mat = avg_image.img;
     [x,y,z,t] = size(avg_mat);
     iteration = 1000;
