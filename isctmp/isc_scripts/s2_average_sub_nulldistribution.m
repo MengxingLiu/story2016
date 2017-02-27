@@ -26,30 +26,30 @@ threshold_img = zeros(x,y,z,6);
 for tp = {'CS' 'US' 'SW' 'NS'}
     tic;
     for sub = sub4lis
-    sub_image = load([spath 'r_distribution' '_' tp{1} '_' sub{1} '.mat']);
-    sub_mat = single(sub_image.img);
-    disp(['Working on ', tp{1}, ' of ' sub{1} ])
-                    distribution_img = distribution_img + sub_mat;
-       end
-	distribution_img = distribution_img / length(sub4lis);          
-	for vx = 1:x
-		for vy = 1:y
-			for vz = 1:z
-				distribution_img(vx,vy,vz,:) = sort(distribution_img(vx,vy,vz,:));
-				threshold_img(vx,vy,vz,:) = [distribution_img(vx,vy,vz,950) distribution_img(vx,vy,vz,990) ...
-						distribution_img(vx,vy,vz,995) distribution_img(vx,vy,vz,999) ...
-						 mean(distribution_img(vx,vy,vz,:)) std(distribution_img(vx,vy,vz,:))];
-			end
-		end
-	end
+        sub_image = load([spath 'r_distribution' '_' tp{1} '_' sub{1} '.mat']);
+        sub_mat = sub_image.nulldistribution;
+        disp(['Working on ', tp{1}, ' of ' sub{1} ])
+        distribution_img = distribution_img + sub_mat;
+    end
+    distribution_img = distribution_img / length(sub4lis);          
+    distribution_img = sort(distribution_img,4);
+    for vx = 1:x
+    for vy = 1:y
+    for vz = 1:z
+        threshold_img(vx,vy,vz,:) = [distribution_img(vx,vy,vz,950) distribution_img(vx,vy,vz,990) ...
+                                    distribution_img(vx,vy,vz,995) distribution_img(vx,vy,vz,999) ...
+                                    mean(distribution_img(vx,vy,vz,:)) std(distribution_img(vx,vy,vz,:))];
+    end
+    end
+    end
     toc;
-    save([spath 'mat_thrshd_lis_' tp{1} '.mat'],'threshold_img');
-    save([spath 'mat_distri_lis_' tp{1} '.mat'],'distribution_img');
+    save([spath 'mat_thrshd_intergroup_' tp{1} '.mat'],'threshold_img');
+    save([spath 'mat_distri_intergroup_' tp{1} '.mat'],'distribution_img');
     nii_out = make_nii(threshold_img, [3 3 3]);
-    save_nii(nii_out,[spath 'thrshd_lis' tp{1}, '.nii']);    
+    save_nii(nii_out,[spath 'thrshd_intergroup_' tp{1}, '.nii']);    
 
-    nii_out = make_nii(distribution_img, [3 3 3]);
-    save_nii(nii_out,[spath 'distr_lis' tp{1}, '.nii']);    
+%   nii_out = make_nii(distribution_img, [3 3 3]);
+%   save_nii(nii_out,[spath 'distr_lis' tp{1}, '.nii']);    
 end
 
 disp(['%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'])
