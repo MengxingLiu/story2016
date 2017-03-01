@@ -48,3 +48,28 @@ foreach tp(NS CS US SW)
         "$tp"_thresholed_001.nii
 
 end
+
+
+    3dbucket -prefix ISC_intergroup_map.nii \
+        CS_intergroup_map.nii US_intergroup_map.nii \
+        SW_intergroup_map.nii NS_intergroup_map.nii
+
+    3drefit -sublabel 0 CS_05 \
+            -sublabel 1 CS_01 \
+            -sublabel 2 CS_005 \
+            -sublabel 3 CS_001 \
+            -sublabel 4 US_05 \
+            -sublabel 5 US_01 \
+            -sublabel 6 US_005 \
+            -sublabel 7 US_001 \
+            -sublabel 8 SW_05 \
+            -sublabel 9 SW_01 \
+            -sublabel 10 SW_005 \
+            -sublabel 11 SW_001 \
+            -sublabel 12 NS_05 \
+            -sublabel 13 NS_01 \
+            -sublabel 14 NS_005 \
+            -sublabel 15 NS_001 \
+            ISC_intergroup_map.nii
+            
+
