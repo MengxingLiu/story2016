@@ -16,6 +16,9 @@ foreach sub(sub02 sub03 sub04 sub05 sub06 sub07 sub08 sub09 \
 
 end
 end
+# change the orientation of threshold results
+# because the nii_out gives the wrong orientation
+
 
 foreach tp(CS US SW NS)
     3drefit -duporigin mask_group.nii -orient RAI thrshd_intergroup_"$tp".nii
@@ -23,4 +26,7 @@ foreach tp(CS US SW NS)
     3dLRflip -prefix thrshd_intergroup_"$tp"_flipled.nii -AP flipled_"$tp".nii
     rm flipled_"$tp".nii
 end
+
+
+
 
