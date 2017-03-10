@@ -12,21 +12,39 @@ cd "$spath"/group/func_connect
           -c "$spath"/group/MVM/Clustermask.nii.gz\[6] \   # Listen_SW
           -d "$spath"/group/anat_ROIs/lh_FFG.nii.gz \      # FFG mask
           -expr "(step(a)+step(b)+step(c))*d"
+     3dcalc -prefix mask/FFG_lh_read.nii.gz \
+          -a "$spath"/group/MVM/Clustermask.nii.gz\[7] \   # Read_CS
+          -b "$spath"/group/MVM/Clustermask.nii.gz\[8] \   # Read_US
+          -c "$spath"/group/MVM/Clustermask.nii.gz\[9] \   # Read_SW
+          -d "$spath"/group/anat_ROIs/lh_FFG.nii.gz \      # FFG mask
+          -expr "(step(a)+step(b)+step(c))*d"
+
 
 ##################################################################
 # Step 2: Compute the simple correlation analysis for each subject
 #================================================================
 #!/bin/csh
 set spath = "/Users/jfyang/projects/task_VWFA/analysis"
+
 #=====Here get the ts for each condition
-foreach sub(sub01 sub02 sub03 sub04 sub05 sub06 sub07 sub08 sub09 sub10 sub11 sub12 sub13 sub14 sub15 sub16)
+foreach task( listen read)
+    if $task = "listen" then
+        set sublist = ( sub02 sub03 sub04 sub05 sub06 sub07 sub08 sub09 \
+                    sub12 sub13 sub15 sub16 sub31 sub32)
+    else 
+        set sublist = ( sub10 sub11 sub14 sub17 sub19 sub20 sub21 \
+                 sub22 sub23 sub24 sub25 sub26 sub27 sub28 \
+                 sub29 sub33)
+    endif
+
+    foreach sub( $sublist )
      #mkdir "$spath"/"$sub"/simCorrAna/
-     mkdir "$spath"/"$sub"/simCorrAna/icaFFG/
-     foreach type(SD LD)
-          echo "===========Simple Correlation Analysis for: $sub of $type ==================="
-          #cd "$spath"/"$sub"/simCorrAna/
-          #     set tsfile = "$spath"/"$sub"/map2subAvg/ts_"$type"+tlrc.nii.gz
-          #     3dSynthesize -cbucket "$spath"/"$sub"/orig_files/GLM_"$type".cbucket_at+tlrc.nii.gz \
+     mkdir -p "$spath"/group/func_connect/"$sub"/
+            echo "===========Simple Correlation Analysis for: $sub of $type ==================="
+            cp /public/home/max/story2016fMRI/group/ISC/orig_files/ts_"$type"_"$sub".nii \
+            "$spath"/group/func_connect/"$sub"/
+            set tsfile = "$spath"/group/func_connect/"$sub"/ts_"$type"_"$sub".nii
+            3dSynthesize -cbucket "$spath"/"$sub"/orig_files/GLM_"$type".cbucket_at+tlrc.nii.gz \
           #               -matrix "$spath"/"$sub"/orig_files/GLM_"$type".x1D -select 7..13 \
           #               -prefix "$type"_NoInterest+tlrc.nii.gz
 
@@ -196,7 +214,7 @@ end
 
 3dcalc -prefix ngtv_LD-SD_lh_FFG_All+tlrc.nii.gz \
           -a LD-SD_lh_FFG_All+tlrc.nii.gz \
-          -expr 'a*negative(a)
+          -expr 'a*negative(a)'
 
 #====================================
 #Output the label for each ROI
