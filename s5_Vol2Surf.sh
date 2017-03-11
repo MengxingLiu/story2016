@@ -10,8 +10,9 @@ foreach sub(sub02 sub03 sub04 sub05 sub06 sub07 sub08 sub09 sub10 sub11 sub12 su
 
 # 	mkdir "$spath"/"$sub"/surface_files/
 	cd "$spath"/"$sub"/orig_files/
-	set infile = GLM_glts
-#set infile = GLM_2_glts
+#	set infile = ts_normalized 
+#       set infile = GLM_2_glts
+        set infile = GLM.cbucket
 	foreach hemi(lh rh)
 		echo "Working on: $infile -->  $hemi ... "
 		rm ../surface_files/"$hemi"_"$infile".1D
