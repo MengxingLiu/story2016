@@ -22,10 +22,10 @@ while ( $n <= 33 )
 		3dAFNItoNIFTI -float \
 			-prefix Anatomical_reg_AlndExp_at+tlrc.nii.gz \
 			Anatomical_reg_AlndExp_at+tlrc.
-		set glm = GLM
-		set glt = GLM_glts
+	#	set glm = GLM
+	#	set glt = GLM_glts
 		
-		foreach infile( $glm $glt )
+		foreach infile(GLM.cbucket)
 			echo "Working on file: $infile ..."			
 		rm "$spath"/"$sub"/"$infile"_at+tlrc*
 			@auto_tlrc -rmode NN -dxyz 3 \
