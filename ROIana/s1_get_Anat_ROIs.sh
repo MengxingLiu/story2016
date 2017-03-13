@@ -54,4 +54,3 @@ foreach type("IFG_tri 6" "IFG_orb 4" "IFG_ope 3" "MFG 54" "STG 34" "MTG 32" "Inf
                -expr "step(equals(a,$n))"
      end
 end
-

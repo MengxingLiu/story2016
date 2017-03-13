@@ -3,7 +3,7 @@
 #########      Pre-processing
 ##############################################################################
 
-set spath="/media/max/Mengxing/story2016fMRI"
+set spath="/public/home/max/story2016fMRI"
 
 #if $#argv != 1 then
 #	echo "Usage: csh preprossing.sh [SubjDirectory]"
@@ -11,8 +11,8 @@ set spath="/media/max/Mengxing/story2016fMRI"
 #else
 #	set sub = $argv[1]
 
-foreach sub(sub02 sub03 sub04 sub05 sub06 sub07 sub08 sub09 sub10 sub11 sub12 sub13 sub14 sub15 sub16 sub17 sub18 sub19 sub20 sub21 sub22 sub23 sub24 sub25 sub26 sub27 sub28 sub29 sub30 sub31 sub32 sub33)
-#foreach sub(sub21)
+# foreach sub(sub02 sub03 sub04 sub05 sub06 sub07 sub08 sub09 sub10 sub11 sub12 sub13 sub14 sub15 sub16 sub17 sub18 sub19 sub20 sub21 sub22 sub23 sub24 sub25 sub26 sub27 sub28 sub29 sub30 sub31 sub32 sub33)
+foreach sub(sub19)
 	cd "$spath"/"$sub"/orig_files
 
 		echo "##################################################"

@@ -38,53 +38,54 @@ foreach task( listen read)
     endif
 
     foreach sub( $sublist )
-     #mkdir "$spath"/"$sub"/simCorrAna/
-     mkdir -p "$spath"/group/func_connect/"$sub"/
-            echo "===========Simple Correlation Analysis for: $sub of $type ==================="
-            cp /public/home/max/story2016fMRI/group/ISC/orig_files/ts_"$type"_"$sub".nii \
-            "$spath"/group/func_connect/"$sub"/
-            set tsfile = "$spath"/group/func_connect/"$sub"/ts_"$type"_"$sub".nii
-            3dSynthesize -cbucket "$spath"/"$sub"/orig_files/GLM_"$type".cbucket_at+tlrc.nii.gz \
-          #               -matrix "$spath"/"$sub"/orig_files/GLM_"$type".x1D -select 7..13 \
-          #               -prefix "$type"_NoInterest+tlrc.nii.gz
+        #mkdir "$spath"/"$sub"/simCorrAna/
+        mkdir -p "$spath"/group/func_connect/"$sub"/
+        cd "$spath"/group/func_connect/"$sub"/
+        echo "===========Simple Correlation Analysis for: $sub  ==================="
+        set tsfile = "$spath"/"$sub"/map2subAvg/ts.nii
+        3dSynthesize -cbucket "$spath"/"$sub"/map2subAvg/GLM.cbucket.nii.gz \
+            -matrix "$spath"/"$sub"/orig_files/GLM.x1D -select \
+            0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 24 25 26 27 28 29 \
+            -prefix ts_NoInterest.nii.gz
 
-          #     3dcalc -prefix "$type"_CleanData_All+tlrc.nii.gz \
-          #               -a $tsfile \
-          #               -b "$type"_NoInterest+tlrc.nii.gz \
-          #               -expr '(a-b)'
+        3dcalc -prefix ts_CleanData_All.nii.gz \
+               -a $tsfile \
+               -b ts_NoInterest.nii.gz \
+               -expr '(a-b)'
           #     rm "$type"_NoInterest+tlrc.nii.gz
-
-          cd "$spath"/"$sub"/simCorrAna/icaFFG/
-          foreach cond (All)
+        foreach type( CS US SW NS )
+                 # split the whole time series into 4 ts, for 4 conditions
+            3dTcat -prefix ts_CleanData_"$type".nii.gz \
+                ts_CleanData_All.nii.gz"[1dcat /public/home/max/scripts/story2016/index_$type.1D]"
            # Here 3dAutomask not worked well no-skulled dataset, so we get it from Anatomical dataset
                 #3dAutomask -prefix CleanData_mask CleanData_at+tlrc
                 #3dAutomask -prefix CleanData_mask Anatomical_reg_AlndExp_ns_at+tlrc
           # Here Our Dataset are based on skullstripped, so itself can be the mask
-               3dmaskave -quiet -mask ../"$type"_CleanData_"$cond"+tlrc.nii.gz \
-                         ../"$type"_CleanData_"$cond"+tlrc.nii.gz > "$type"_Global_"$cond".1D
+               3dmaskave -quiet -mask ts_CleanData_"$type".nii.gz \
+                         ts_CleanData_"$type".nii.gz > ts_Global_"$type".1D
 
-                3dmaskave -mask "$spath"/group/simCorrAna/icaFFG/mask/icaFFG_lh.nii.gz \
-                          ../"$type"_CleanData_"$cond"+tlrc.nii.gz | awk '{print $1}' \
-                          > "$type"_lh_FFG_"$cond".1D
+                3dmaskave -mask "$spath"/group/anat_ROIs/lh_FFG.nii.gz \
+                          ../ts_CleanData_"$type".nii.gz | awk '{print $1}' \
+                          > ts_lh_FFG_"$type".1D
 
-               3dDeconvolve -input ../"$type"_CleanData_"$cond"+tlrc.nii.gz \
+               3dDeconvolve -input ../ts_CleanData_"$type".nii.gz \
                     -polort A \
                     -num_stimts 2 \
-                    -stim_file 1 "$type"_Global_"$cond".1D -stim_label 1 NoInterest \
-                    -stim_file 2 "$type"_lh_FFG_"$cond".1D -stim_label 2 lh_FFG \
+                    -stim_file 1 ts_Global_"$type".1D -stim_label 1 NoInterest \
+                    -stim_file 2 ts_lh_FFG_"$type".1D -stim_label 2 lh_FFG \
                     -tout -rout \
-                    -bucket "$type"_Corr_lh_FFG_"$cond"+tlrc.nii.gz
+                    -bucket Corr_lh_FFG_"$type".nii.gz
                     rm *.REML_cmd
                     rm *.xmat.1D
                     rm *.xsave
-               3dcalc -prefix "$type"_Corr_lh_FFG_"$cond"_R+tlrc.nii.gz \
-                         -a "$type"_Corr_lh_FFG_"$cond"+tlrc.nii.gz'[7]' \
-                         -b "$type"_Corr_lh_FFG_"$cond"+tlrc.nii.gz'[5]' \
+               3dcalc -prefix Corr_lh_FFG_"$type"_R.nii.gz \
+                         -a Corr_lh_FFG_"$type".nii.gz'[7]' \
+                         -b Corr_lh_FFG_"$type".nii.gz'[5]' \
                          -expr "ispositive(b)*sqrt(a)-isnegative(b)*sqrt(a)"
-               3dcalc -prefix "$type"_Corr_lh_FFG_"$cond"_Z+tlrc.nii.gz \
-                         -a "$type"_Corr_lh_FFG_"$cond"_R+tlrc.nii.gz \
+               3dcalc -prefix Corr_lh_FFG_"$type"_Z.nii.gz \
+                         -a Corr_lh_FFG_"$type"_R+tlrc.nii.gz \
                          -expr 'log((1+a)/(1-a))/2'
-               rm "$type"_Corr_lh_FFG_"$cond"_R+tlrc.nii.gz
+               rm Corr_lh_FFG_"$type"_R+tlrc.nii.gz
           end
      end
 end
