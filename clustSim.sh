@@ -5,7 +5,7 @@ foreach type("Intercept 0" "F_Modality 1" "F_Scale 2" "F_Mo:Scale 3" "Listen_CS 
 	set tt=(`echo ${type} | awk '{print $1}'`)
 	set n=(`echo ${type} | awk '{print $2}'`)
 
-	set fn = group_MVM_rejectmotionsub.nii\["$n"]
+	set fn = group_MVM.nii\["$n"]
 	
 		set fx = (`3dFWHMx -dset "$fn"	| awk '{print $1}' `)
 		set fy = (`3dFWHMx -dset "$fn"	| awk '{print $2}' `)
