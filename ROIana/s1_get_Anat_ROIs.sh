@@ -25,12 +25,13 @@ foreach sub(subAvg)
                -map_func max_abs \
                -f_steps 15 \
                -f_index voxels \
-               -f_p1_fr -0.2 -f_pn_fr 0.4 \
+               -f_p1_fr 0.2 -f_pn_fr 0.8 \
                -prefix ./ROIs_"$hemi".nii.gz
           rm "$hemi".ROIs.1D
           # Here I set -f_pn_fr 1.2 instead of 0.4 to make sure FFG covered all voxels.
      end
 end
+    3dcalc -prefix STGmask.nii -a ROIs_lh.nii.gz -expr 'step(equals(a,380))'
 
 
      3dcalc \
@@ -44,13 +45,17 @@ mv ROIs_*h.nii.gz anat_ROIs/
 
 cd anat_ROIs/
 rm *h_*.nii.gz
-foreach type("IFG_tri 6" "IFG_orb 4" "IFG_ope 3" "MFG 54" "STG 34" "MTG 32" "InfTempG 31" "SMG 23" "AG 22" "SupPari 59" "FFG 542" )
-     set ROI=(`echo $type | awk '{print $1}'`)
-     set n=(`echo $type | awk '{print $2}'`)
 
-     foreach hemi(lh rh)
-          3dcalc -prefix "$hemi"_"$ROI".nii.gz \
+# FFG 542;  STG:380 and 561
+# get FFG ROI
+    foreach hemi(lh rh)
+        3dcalc -prefix "$hemi"_FFG.nii.gz \
                -a ROIs_"$hemi".nii.gz \
-               -expr "step(equals(a,$n))"
+               -expr "step(equals(a,542))"
+        3dcalc -prefix "$hemi"_STG.nii.gz \
+                -a ROIs_"$hemi".nii.gz \
+                -expr "(step(equals(a,561) + equals(a,380)))*(step(324-(y-25)*(y-25)))"
+        # here we want the auditory area, so we select the STG
+        # between 7<y<43 slices
      end
-end
+    
