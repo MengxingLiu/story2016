@@ -57,28 +57,28 @@ foreach task( listen  read)
             3dmaskave -quiet -mask ts_CleanData_"$type".nii.gz \
                          ts_CleanData_"$type".nii.gz > ts_Global_"$type".1D
 
-            3dmaskave -mask "$spath"/group/func_connect/mask/FFG_lh_"$task".nii.gz \
+            3dmaskave -mask "$spath"/group/func_connect/mask/lh_STG.nii.gz \
                           ts_CleanData_"$type".nii.gz | awk '{print $1}' \
-                          > ts_lh_FFG_"$type".1D
+                          > ts_lh_STG_"$type".1D
 
             3dDeconvolve -input ts_CleanData_"$type".nii.gz \
                     -polort A \
                     -num_stimts 2 \
                     -stim_file 1 ts_Global_"$type".1D -stim_label 1 NoInterest \
-                    -stim_file 2 ts_lh_FFG_"$type".1D -stim_label 2 lh_FFG \
+                    -stim_file 2 ts_lh_STG_"$type".1D -stim_label 2 lh_STG \
                     -tout -rout \
-                    -bucket Corr_lh_FFG_"$type".nii.gz
+                    -bucket Corr_lh_STG_"$type".nii.gz
                     rm *.REML_cmd
                     rm *.xmat.1D
                     rm *.xsave
-            3dcalc -prefix Corr_lh_FFG_"$type"_R.nii.gz \
-                         -a Corr_lh_FFG_"$type".nii.gz'[7]' \
-                         -b Corr_lh_FFG_"$type".nii.gz'[5]' \
+            3dcalc -prefix Corr_lh_STG_"$type"_R.nii.gz \
+                         -a Corr_lh_STG_"$type".nii.gz'[7]' \
+                         -b Corr_lh_STG_"$type".nii.gz'[5]' \
                          -expr "ispositive(b)*sqrt(a)-isnegative(b)*sqrt(a)"
-               3dcalc -prefix Corr_lh_FFG_"$type"_Z.nii.gz \
-                         -a Corr_lh_FFG_"$type"_R.nii.gz \
+               3dcalc -prefix Corr_lh_STG_"$type"_Z.nii.gz \
+                         -a Corr_lh_STG_"$type"_R.nii.gz \
                          -expr 'log((1+a)/(1-a))/2'
-               rm Corr_lh_FFG_"$type"_R.nii.gz
+               rm Corr_lh_STG_"$type"_R.nii.gz
           end
      end
 end
