@@ -159,5 +159,4 @@ foreach ROIs( STG FFG )
 			s33	Read	US	"$spath"/sub33/Corr_lh_"$ROIs"_US_Z.nii.gz \
 			s33	Read	SW	"$spath"/sub33/Corr_lh_"$ROIs"_SW_Z.nii.gz \
                         s33	Read	NS	"$spath"/sub33/Corr_lh_"$ROIs"_NS_Z.nii.gz 
-
-
+end
