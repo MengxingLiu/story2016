@@ -4,11 +4,17 @@
 
 # ATL 568     Insula 574+576+385   aIFG 377+379    pIFG 597
 # AG 605+547 pMTG 604    SPS 584+587
-
+# temporal cortex 605 557 604 556
 # AG 547
 
 cd /public/home/max/story2016fMRI/group/anat_ROIs
 
+foreach h(lh rh)
+    rm "$h"_temporal.nii.gz
+    3dcalc -a ROIs_"$h".nii.gz \
+        -expr "or(equals(a,605),equals(a,557),equals(a,604),equals(a,556),equals(a,568))" \
+        -prefix "$h"_temporal.nii.gz
+end
 foreach type("STG 605" "ATL 568" "pMTG 604" "pIFG 597" "AG_2 547")
     set ROI = (`echo $type | awk '{print $1}'`)
     set n = (`echo $type | awk '{print $2}'`)
@@ -56,4 +62,19 @@ end
     3dcalc -prefix lh_STG_small.nii.gz \
             -a lh_STG.nii.gz \
             -expr 'a*step(324-(y-25)*(y-25))'
- 
+# select anterior temporal cortex  y<1
+    rm lh_aT.nii.gz
+    3dcalc -prefix lh_aT.nii.gz \
+        -a lh_temporal.nii.gz \
+        -expr "a*step(1-y)" 
+# select middle temporal cortex 15<y<24
+    rm lh_mT.nii.gz
+    3dcalc -prefix lh_mT.nii.gz \
+        -a lh_temporal.nii.gz \
+        -expr "a*step(y-15)*step(34-y)"
+# select posterior temporal cortex 49<y<61
+    rm lh_pT.nii.gz 
+    3dcalc -prefix lh_pT.nii.gz \
+        -a lh_temporal.nii.gz \
+        -expr "a*step(y-49)*step(61-y)"
+
