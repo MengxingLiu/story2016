@@ -26,8 +26,8 @@ def plot_bar(m1,m2,m3,s1,s2,s3,task,ROI):
     plt.ylabel('Beta Value',**csfont)
     plt.xticks(ind,('CS','US','SW'),**csfont)
     plt.yticks(**csfont)
-    
-    plt.tick_params(which='major',width=2,direction='in')
+    plt.tick_params(axis = 'x',color = 'none')
+    plt.tick_params(axis = 'y', which='major',width=2,direction='in')
     if means[0] < 0:
         plt.axis(ymax=0)
     else:
