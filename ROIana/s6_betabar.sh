@@ -99,6 +99,7 @@ foreach task (listen read)
         end
     end
 end
+    source /public/software/profile.d/python-3.5.1-gnu.csh
 cd "$ROIanapath"
 foreach task (listen read )
     echo  "KEY CS US SW" > summary_"$task".txt
@@ -109,26 +110,28 @@ foreach task (listen read )
         set s1 = (`cat "$task"_"$ROI".1D | tail -16 | dm x2 | stats | grep se | awk '{printf("%.5f",$3)}'`)
         set s2 = (`cat "$task"_"$ROI".1D | tail -16 | dm x3 | stats | grep se | awk '{printf("%.5f",$3)}'`)
         set s3 = (`cat "$task"_"$ROI".1D | tail -16 | dm x4 | stats | grep se | awk '{printf("%.5f",$3)}'`)
+        python3 plot_bar.py $m1 $m2 $m3 $s1 $s2 $s3 $task $ROI        
         echo $ROI "$m1($s1)" "$m2($s2)" "$m3($s3)" >> summary_"$task".txt
     end
 end
 #######################################################################
 ## step 7: Plot out the betas values for conditions across two Tasks
 #======================================================================
-foreach ROI(aIFG pIFG FFG Insula SPS aT mT pT)
-    echo KEY listen read > head.tmp
-    echo "CS US SW" | transpose > key.tmp
-    foreach task(listen read) 
+foreach task(listen read)
+
+    foreach ROI(aIFG pIFG FFG Insula SPS aT mT pT)
+        printf "KEY\t$task\n" > head.tmp
+        echo "CS US SW" | transpose > key.tmp
         cat summary_"$task".txt | grep "$ROI" \
             | dm s2 s3 s4 | transpose > "$task".tmp
-    end
-    abut key.tmp listen.tmp read.tmp > temp.tmp
-    cat head.tmp temp.tmp | graf -font Arial -fontsize 18 -width 3.6 \
+        abut_stat key.tmp "$task".tmp > temp.tmp
+        cat head.tmp temp.tmp | graf -font Arial -fontsize 18 -width 3.6 \
                             -height 3.6 -linewidth 1 -ymax 0.06 -ymin 0.00 \
                             -num_major_yticks 3 -num_minor_yticks 1 \
                             -errbarwidth 0.6 -barborderthickness 1 \
                             -color0 white \
-        > fig_"$ROI".eps
+        > fig_"$task"_"$ROI".eps
+    end
 end
 
 
