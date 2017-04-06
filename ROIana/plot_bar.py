@@ -9,16 +9,12 @@ def plot_bar(m1,m2,m3,s1,s2,s3,task,ROI):
     ses = [float(x) for x in se]
     ind = np.arange(len(means))
     width = 0.36
-    plt.rc('lines', linewidth=5, color='r') 
     csfont = {'fontname':'Arial','fontsize':18}
     fig=plt.figure()
     ax = fig.add_subplot(111)
-    plt.title(ROI,**csfont)
-    for axis in ['top','bottom','left','right']:
-        ax.spines[axis].set_linewidth(2)
-    ax.spines['bottom'].set_color('none')
+    plt.title(ROI+" in "+task,**csfont)
     ax.spines['right'].set_color('none')
-    bars = plt.bar(ind,means, width, linewidth = 2, color='white',edgecolor='black', align='center', ecolor='k', fill= 'True')
+    bars = plt.bar(ind,means, width, linewidth = 2, color='white',edgecolor='black', align='center', fill= 'True')
     patterns = ('','///','...')
     for bar , pattern in zip(bars, patterns):
         bar.set_hatch(pattern)
@@ -28,14 +24,23 @@ def plot_bar(m1,m2,m3,s1,s2,s3,task,ROI):
     plt.yticks(**csfont)
     plt.tick_params(axis = 'x',color = 'none')
     plt.tick_params(axis = 'y', which='major',width=2,direction='in')
-    if means[0] < 0:
+    for axis in ['top','bottom','left','right']:
+        ax.spines[axis].set_linewidth(2)
+    if max(means) < 0:
+        ax.spines['bottom'].set_color('none')
         plt.axis(ymax=0)
-    else:
+    elif min(means) > 0:
         plt.axis(ymin=0)
-    myfig = 'fig_'+ task + '_' + ROI + '.svg'
+        ax.spines['top'].set_color('none')
+    else:
+        ax.spines['bottom'].set_color('none')
+        ax.spines['top'].set_color('none')
+        ax.axhline(linewidth=2, color='black') 
+    myfig = 'fig_'+ task + '_' + ROI + '.png'
     plt.savefig(myfig)
-    plt.show()
-"[m1,m2,m3,s1,s2,s3,task,ROI] = sys.argv[1:]"
+    "plt.show()"
+[m1,m2,m3,s1,s2,s3,task,ROI] = sys.argv[1:]
+"""
 m1 = -0.01135
 m2 = -0.01100
 m3 = -0.01073
@@ -44,7 +49,7 @@ s2 = 0.00195
 s3 = 0.00205
 task = "listen"
 ROI = "aIFG"
-
+"""
 plot_bar(m1,m2,m3,s1,s2,s3,task,ROI)
 
 
