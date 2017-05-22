@@ -24,18 +24,27 @@ def plot_curve(index, means, ses, ROI, task):
     plt.ylabel('Changing percent', **csfont)
     plt.xticks(index, (np.arange(-10,6)),**csfont)
     plt.yticks(**csfont)
-    plt.tick_params(axis = 'y', which='major',width=2,
+    plt.tick_params(axis = 'y', left = 'off',which='major',width=2,
                     color='#AEB6BF',direction='in')
-    plt.tick_params(axis = 'x', width=2, direction='in',
+    plt.tick_params(axis = 'x', bottom = 'off', width=2, direction='in',
                     color = '#AEB6BF')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
+    '''
     ax.spines['left'].set_linewidth(2)
     ax.spines['left'].set_color('#AEB6BF')
     ax.spines['bottom'].set_color('#AEB6BF')
     ax.spines['bottom'].set_linewidth(2)
+    '''
+    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    plt.axvspan(10, 16,facecolor='#CCD1D1')
+    ' remove the last highlight column'
+    plt.axis(xmax = 16)
+
     'set background color'
     ax.patch.set_facecolor('#E5E7E9')
+    ax.grid(color='w', linewidth=2)
     ''' 
     plot with erro bar
     plt.errorbar(index, means[0,:],yerr = ses[0,:], 
@@ -52,7 +61,7 @@ def plot_curve(index, means, ses, ROI, task):
                 linestyle = '-.', ecolor = 'g', label = 'SW')
     '''
     myfig = 'blockfig_'+ task + '_' + ROI + '.png'
-    plt.savefig(myfig)
+    plt.savefig(myfig, dpi=600)
 
 
 
