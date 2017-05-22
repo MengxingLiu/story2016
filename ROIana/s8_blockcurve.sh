@@ -3,7 +3,24 @@
 # here average all block BOLD curve for each condition
 # the index refered to /Wave1D_files/*1d.mx
 
-foreach sub(sub02)
+set spath = /public/home/max/story2016fMRI
+set maskpath =  /public/home/max/story2016fMRI/group/anat_ROIs
+set ROIanapath =  /public/home/max/story2016fMRI/group/ROI_ana
+
+
+
+foreach task (listen read)
+     if ($task == "listen") then
+        set sublist = ( sub02 sub03 sub04 sub05 sub06 sub07 sub08 sub09 \
+                    sub12 sub13 sub15 sub16 sub31 sub32)
+    else
+        set sublist = ( sub10 sub11 sub14 sub17 sub19 sub20 sub21 \
+                 sub22 sub23 sub24 sub25 sub26 sub27 sub28 \
+                 sub29 sub33)
+    endif
+
+foreach sub($sublist)
+    cd $spath/$sub/map2subAvg
     # The previous 10 TRs are included
     # CS condtion
     3dTcat -prefix ts_cs_01.nii ts.nii\[12..27]
@@ -39,3 +56,18 @@ foreach sub(sub02)
     3dTcat -prefix ts_sw_09.nii ts.nii\[739..754]
     3dTcat -prefix ts_sw_10.nii ts.nii\[772..787]
  
+    foreach type(cs us sw)
+        3dMean -prefix mean_"$type"_block.nii.gz ts_"$type"_*.nii
+        rm ts_"$type"_*.nii
+        foreach ROI(aIFG pIFG FFG Insula SPS ATL mTC AG)
+            3dmaskave -mask "$maskpath"/lh_"$ROI".nii.gz \
+                mean_"$type"_block.nii.gz | dm x1 \
+                | transpose > temp_beta.tmp
+            echo `cat temp_beta.tmp` > \
+                    "$ROIanapath"/block_curve/"$task"_"$type"_"$ROI"_"$sub".1D
+            rm temp_beta.tmp
+    
+        end                    
+    end
+end
+end
