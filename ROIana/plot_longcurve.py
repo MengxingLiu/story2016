@@ -5,6 +5,9 @@ import os
 import matplotlib.pyplot as plt
 def plot_curve( means, ses, ROI, task, block_index):
     plt.close()
+    fig_size = plt.rcParams["figure.figsize"]
+    fig_size[0] = 16
+    fig_size[1] = 9
     csfont = {'fontname':'Ubuntu','fontsize':14}
     fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -72,17 +75,17 @@ def plot_curve( means, ses, ROI, task, block_index):
                 linestyle = '-.', ecolor = 'g', label = 'SW')
     '''
     myfig = 'blockfig_'+ task + '_' + ROI + '_' + block_index + '.png'
-    plt.savefig(myfig, dpi=600)
+    plt.savefig(myfig, dpi=300)
 
 
 
-for task in ('listen', 'read'):
-    for ROI in ('aIFG', 'pIFG', 'FFG', 'Insula', 'SPS', 'ATL', 'mTC', 'AG'):
-        means = np.empty(shape=[0,16])
-        ses = np.empty(shape=[0,16])
-        means = []
-        ses = []
-        for i in range(10):
+for i in range(10):
+    for task in ('listen', 'read'):
+        for ROI in ('aIFG', 'pIFG', 'FFG', 'Insula', 'SPS', 'ATL', 'mTC', 'AG'):
+            means = np.empty(shape=[0,16])
+            ses = np.empty(shape=[0,16])
+            means = []
+            ses = []
             block_index = '%02d' % (i+1)
             for condition in ('cs', 'us', 'sw'):
                 a = 1
@@ -101,6 +104,7 @@ for task in ('listen', 'read'):
                 'ses = np.append(ses, [np.divide(std, np.sqrt(len(X[:,0])))], axis = 0)'
                 ses.append([np.divide(std,np.sqrt(len(X[:,0]))).tolist()])
             plot_curve(means, ses, ROI, task,block_index)
+            print('the ' + block_index + ' for ' + task + ' of ' + ROI)
 
 
 
