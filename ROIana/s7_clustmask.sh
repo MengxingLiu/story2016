@@ -20,14 +20,37 @@ foreach paras("01_Read_CS 13 2.048" "02_Read_US 15 2.048" \
 	echo "######## threshold at F or T > $threshold #########"
 	echo "###################################################"	
 
-	3dclust -prefix "$con"_clustmask.nii.gz \
+	3dclust -prefix "$con"_Read_FFG.nii.gz \
 		-1Dformat -nosum -1dindex 0 -1tindex 0 \
 		-1thresh $threshold \
 		-dxyz=1 1.01 $clustersize \
 		/public/home/max/story2016fMRI/group/func_connect/functional_connect_FFG.nii.gz\["$thindex"]
 
 end
-	3dbucket *_clustmask.nii.gz -prefix Clustermask_FFG.nii.gz
-        rm *_clustmask.nii.gz
+	3dbucket *_Read_FFG.nii.gz -prefix Read_FFG.nii.gz
+        rm *_Read_FFG.nii.gz
+
+cd /public/home/max/story2016fMRI/group/func_connect/ 
+foreach paras("01_Listen_CS 5 2.048" "02_Listen_US 7 2.048" \
+		"03_Listen_SW 9 2.048 " "04_Listen_NS 11 2.048")
+	set con=(`echo $paras | awk '{print $1}'`)
+	set thindex=(`echo $paras | awk '{print $2}'`)
+	set threshold=(`echo $paras | awk '{print $3}'`)
+	set clustersize = 20
+
+	echo "###################################################"
+	echo "########### cluster threshold for $con ############"	
+	echo "######## threshold at F or T > $threshold #########"
+	echo "###################################################"	
+
+	3dclust -prefix "$con"_Listen_STG.nii.gz \
+		-1Dformat -nosum -1dindex 0 -1tindex 0 \
+		-1thresh $threshold \
+		-dxyz=1 1.01 $clustersize \
+		/public/home/max/story2016fMRI/group/func_connect/functional_connect_STG.nii.gz\["$thindex"]
+
+end
+	3dbucket *_Listen_STG.nii.gz -prefix Listen_STG.nii.gz
+        rm *_Listen_STG.nii.gz
 
 

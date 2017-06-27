@@ -22,7 +22,7 @@ mkdir tabout
 foreach value(pstv ngtv)
 
 foreach paras("01_Intercept 0 9.284 32" "02_Modality 1 9.284 20" \
-		"03_Scale 2 5.833 31" "04_Mo:Scale 3 5.833 29" \
+		"03_Scale 2 5.833 31" "04_MoScale 3 5.833 29" \
 		"05_Listen_CS 5 3.047 30" "06_Listen_US 7 3.047 30" \
 		"07_Listen_SW 9 3.047 31" "08_Read_CS 11 3.047 30" \
 		"09_Read_US 13 3.047 30" "10_Read_SW 15 3.047 32" \
@@ -40,22 +40,23 @@ foreach paras("01_Intercept 0 9.284 32" "02_Modality 1 9.284 20" \
 	echo "########### cluster threshold for $con ############"	
 	echo "######## threshold at F or T > $threshold #########"
 	echo "###################################################"	
-
+        cd /public/home/max/story2016fMRI/group/MVM/
 	3dclust -orient LPI \
-		-1Dformat -nosum -1dindex 0 -1tindex 0 \
+		-nosum -1dindex 0 -1tindex 0 \
 		-1thresh $threshold \
 		-dxyz=1 1.01 $clustersize \
 		/public/home/max/story2016fMRI/group/MVM/"$value"_group_MVM.nii\["$thindex"] | \
                 grep -v '#' | dm x14 x15 x16 > checkPeak_"$value"_"$con".tmp
         3dclust -orient LPI \
-		-1Dformat -nosum -1dindex 0 -1tindex 0 \
+		-nosum -1dindex 0 -1tindex 0 \
 		-1thresh $threshold \
 		-dxyz=1 1.01 $clustersize \
 		/public/home/max/story2016fMRI/group/MVM/"$value"_group_MVM.nii\["$thindex"] | \
                 grep -v '#' | dm s1 s11 s13 > checkValues_"$value"_"$con".tmp
         set nROIs = (`cat checkPeak_"$value"_"$con".tmp | wc | dm x1`)
         set ROI = 1
-        echo "Volumes     MeanT     MaxT     MaxRL     MaxAP     MaxIS     Hemi     Label" > head.tmp        while ( $ROI <= $nROIs )
+        echo "Volumes     MeanT     MaxT     MaxRL     MaxAP     MaxIS     Hemi     Label" > head.tmp
+        while ( $ROI <= $nROIs )
             # Get TLRC x y z for each ROIs
             whereami -lpi -tab `cat checkPeak_"$value"_"$con".tmp | head -$ROI | tail -1 ` \
                 | grep '{TLRC}' |  awk '{printf "%s\t%s\t%s\t\n",$1,$4,$7}' \
@@ -71,14 +72,12 @@ foreach paras("01_Intercept 0 9.284 32" "02_Modality 1 9.284 20" \
         cat head.tmp tab_"$value"_"$con".tmp > tabout/"$value"_"$con".1D
         rm *.tmp 
         # Output LaTex table for each file
-        cd tabout/
-        echo "(TLRC coordinates)" > Tex_"$value"_"$con".1D
-        echo "     &     & Hemi     &     Region     &     BA     &     Voxels     &     T     & x     &     y     &     z \\" >> Tex_"$value"_"$con".1D
-        cat "$value"_"$con".1D | grep -v "Vol" | awk '{printf( "\t\&\t\&\t%1s\t\&\t %s %s %s %s\t\&\t\&\t%d\t\&\t%.2f\t\&\t%.0f\t\&\t%.0f\t\&\t\%.0f\t\\\\ \n",$7,$8,$9,$10,$11,$1,$3,$4,$5,$6)}'>> Tex_"$value"_"$con".1D
-        cd ../
+#        cd tabout/
+#        echo "(TLRC coordinates)" > Tex_"$value"_"$con".1D
+#        echo "     &     & Hemi     &     Region     &     BA     &     Voxels     &     T     & x     &     y     &     z \\" >> Tex_"$value"_"$con".1D
+#        cat "$value"_"$con".1D | grep -v "Vol" | awk '{printf( "\t\&\t\&\t%1s\t\&\t %s %s %s %s\t\&\t\&\t%d\t\&\t%.2f\t\&\t%.0f\t\&\t%.0f\t\&\t\%.0f\t\\\\ \n",$7,$8,$9,$10,$11,$1,$3,$4,$5,$6)}'>> Tex_"$value"_"$con".1D
     end
 end
-	3dbucket *_clustmask.nii.gz -prefix Clustermask.nii.gz
 
 
 
